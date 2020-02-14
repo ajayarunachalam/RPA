@@ -1,0 +1,286 @@
+<html>
+<head>
+<title>Mydata</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="{{ url_for('static',filename='js/gauge.js') }}"></script>
+<script>
+var opts = {
+angle: 0, // The span of the gauge arc
+lineWidth: 0.2, // The line thickness
+radiusScale: 1, // Relative radius
+pointer: {
+length: 0.53, // // Relative to gauge radius
+strokeWidth: 0.049, // The thickness
+color: '#000000' // Fill color
+},
+limitMax: true,     // If false, max value increases automatically if value > maxValue
+limitMin: true,     // If true, the min value of the gauge will be fixed
+colorStart: '#6FADCF',   // Colors
+colorStop: '#8FC0DA',    // just experiment with them
+strokeColor: '#E0E0E0',  // to see which ones work best for you
+generateGradient: false,
+highDpiSupport: false,     // High resolution support
+};
+</script>
+<style type="text/css">
+
+/*  Define the background color for all the EVEN table columns  */
+
+#table tr th{
+background: lightgrey;
+}
+
+table,tr,td,th{
+width: auto;
+border-collapse:collapse;
+border:2px solid black;
+}
+tr,th,td{
+padding: 5px;
+text-align: center;
+}
+/*TO hide a particular column in t table*/
+#table td:nth-child(3),#table th:nth-child(3),#table td:nth-child(4),#table th:nth-child(4) {
+display: none;
+}
+#table tr:nth-child(odd){
+background: lightgrey;
+}
+#table,#MQ7,#NDIR,#PH,#SHT,#LUX,#MH,#BME,#dsb20,#par{
+display:block;
+}
+fieldset{
+width: auto;
+align:right;
+}
+legend{
+text-align: center;
+font-size: 20px;
+}
+fieldset div,canvas{
+float:left;
+}
+fieldset div{
+margin-right: 60px;
+width:650px;
+}
+#header{
+background-color: lightyellow;
+}
+body div #single input{
+margin:10px;
+height: 30px;
+min-width:120px;
+}
+#header #single{
+position:absolute;
+display:none;
+z-index:1;
+}
+#header #single input{
+margin: 0;
+padding: 0;
+}
+#header:hover #single{
+display: block;
+}
+#GAUGE div{
+position: absolute;
+padding-left: 275px;
+margin-top: 98px;
+font-size: 28px;
+}
+#GAUGE canvas{
+margin-top: 100px;
+margin-left:140px;
+margin-right: 10px;
+}
+
+.Sname{
+  width: 300px;
+  padding-top: 140px;
+  text-align: center;
+  font-size: 10px;
+  margin-left: -150px;
+  padding-right: 100px;
+}
+</style>
+</head>
+<body>
+<div id="Header">
+<input type='submit' value='SHOW'/><br/>
+<div id="single">
+<input type='submit' name='1' value='CSS811 Sensor' style="Display:None" onclick="show_data(this);"/><br/>
+<input type='submit' name ='2' value='MQ7 Sensor'  onclick="show_data(this);"/><br/>
+<input type='submit' name='3' value='NDIR Sensor'  onclick="show_data(this);"/><br/>
+<input type='submit' name="4" value="EZO pH Sensor"  onclick="show_data(this);"/><br/>
+<input type='submit' name="5" value="SHT1x Sensor"  onclick="show_data(this);"/><br/>
+<input type='submit' name="6" value="Light Sensor"  onclick="show_data(this);"/><br/>
+<input type='submit' name="7" value="Soil MH Sensor"  onclick="show_data(this);"/><br/>
+<input type='submit' name="8" value="BME Sensor"  onclick="show_data(this);"/><br/>
+<input type='submit' name="11" value="DS18B20 Sensor"  onclick="show_data(this);"/><br/>
+<input type='submit' name="12" value="PAR Sensor"  onclick="show_data(this);"/><br/>
+<input type='submit' name="10" value="Show Table"  onclick="show_data(this);"/><br/>
+<input type='submit' name="9" value="Show All"  onclick="show_data(this);"/><br/>
+</div>
+</div>
+<div id="Data">
+<fieldset id="CSS" style="Display:None"><legend>CSS811 Sensor</legend>
+<div id="GAUGE"><canvas id="foo"></canvas><div id="valfoo">Value</div><div class="Sname">MQ7</div></div>
+<div id="GAUGE"><canvas id="foo1"></canvas><div id="valfoo1">Value</div><div class="Sname">MQ7</div></div>
+<div id="Container1"></div>
+<div id="Container2"></div>
+</fieldset><fieldset id="MQ7"><legend> MQ7 Gas Sensor</legend>
+<div id="GAUGE"><canvas id="foo3"></canvas><div id="valfoo3">Value</div><div class="Sname">CO</div></div>
+<div id="Container3"></div>
+</fieldset><fieldset id="NDIR"><legend>NDIR CO2 Sensor</legend>
+<div id="GAUGE"><canvas id="foo4"></canvas><div id="valfoo4">Value</div><div class="Sname">CO2</div></div>
+<div id="Container4"></div>
+</fieldset><fieldset id="SHT"><legend>SHT1x Sensor</legend>
+<div id="GAUGE"><canvas id="foo5"></canvas><div id="valfoo5">Value</div><div class="Sname">TEMPERATURE</div></div>
+<div id="Container5"></div>
+<div id="GAUGE"><canvas id="foo6"></canvas><div id="valfoo6">Value</div><div class="Sname">HUMIDITY</div></div>
+<div id="Container6"></div>
+</fieldset><fieldset id="PH"><legend>EZO-pH Sensor</legend>
+<div id="GAUGE"><canvas id="foo7"></canvas><div id="valfoo7">Value</div><div class="Sname">pH</div></div>
+<div id="Container7"></div>
+</fieldset><fieldset id="LUX"><legend>Light(LUX) Sensor</legend>
+<div id="GAUGE"><canvas id="foo8"></canvas><div id="valfoo8">Value</div><div class="Sname">LUX</div></div>
+<div id="Container8"></div>
+</fieldset><fieldset id="MH"><legend>MH Sensor</legend>
+<div id="GAUGE"><canvas id="foo9"></canvas><div id="valfoo9">Value</div><div class="Sname">MH1</div></div>
+<div id="Container9"></div>
+<div id="GAUGE"><canvas id="foo10"></canvas><div id="valfoo10">Value</div><div class="Sname">MH2</div></div>
+<div id="Container10"></div>
+<div id="GAUGE"><canvas id="foo11"></canvas><div id="valfoo11">Value</div><div class="Sname">MH3</div></div>
+<div id="Container11"></div>
+</fieldset><fieldset id="BME"><legend>BME680 Sensor</legend>
+<div id="GAUGE"><canvas id="foo12"></canvas><div id="valfoo12">Value</div><div class="Sname">TEMPERATURE</div></div>
+<div id="Container12"></div>
+<div id="GAUGE"><canvas id="foo13"></canvas><div id="valfoo13">Value</div><div class="Sname">PRESSURE</div></div>
+<div id="Container13"></div>
+<div id="GAUGE"><canvas id="foo14"></canvas><div id="valfoo14">Value</div><div class="Sname">HUMIDITY</div></div>
+<div id="Container14"></div>
+<div id="GAUGE"><canvas id="foo15"></canvas><div id="valfoo15">Value</div><div class="Sname">GAS</div></div>
+<div id="Container15"></div>
+</fieldset><fieldset id="dsb20"><legend>DS18B20 Sensor</legend>
+<div id="GAUGE"><canvas id="foo16"></canvas><div id="valfoo16">Value</div><div class="Sname">TEMPERATURE</div></div>
+<div id="Container17"></div>
+</fieldset><fieldset id="par"><legend>PAR Sensor</legend>
+<div id="GAUGE"><canvas id="foo17"></canvas><div id="valfoo17">Value</div><div class="Sname">QUANTUM VALUE</div></div>
+<div id="Container18"></div>
+</fieldset>
+<table id="table">
+<tr><th>DATE</th>
+<th>TimeStamp</th>
+<th>CSS811 Co2</th>
+<th>CSS811 TVOC</th>
+<th>MQ7</th>
+<th>NDIR</th>
+<th>SHT Temp</th>
+<th>SHT Humd</th>
+<th>EZO pH</th>
+<th>Light(LUX)</th>
+<th>MH1</th>
+<th>MH2</th>
+<th>MH3</th>
+<th>BME Temp</th>
+<th>BME Press</th>
+<th>BME Humd</th>
+<th>BME Gas</th>
+<th>DS18B20</th>
+<th>PAR</th></tr>
+{% for row in data %}
+<tr>
+{%  for x in row%}
+<td>{{x}}</td>
+{%  endfor %}
+</tr>
+{% endfor %}
+</table>
+</div>
+</body>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/highcharts.src.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/highcharts.export.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/moment.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+function multi_data(data)
+{
+var c = data.name;
+if(data.checked)
+{
+document.getElementById(c).style.display = 'block';
+}
+else
+{
+document.getElementById(c).style.display = 'none';
+}
+}
+function show_data(data)
+{
+var z = parseInt(data.name);
+document.getElementById('CSS').style.display = 'none';
+document.getElementById('MQ7').style.display = 'none';
+document.getElementById('NDIR').style.display = 'none';
+document.getElementById('PH').style.display = 'none';
+document.getElementById('SHT').style.display = 'none';
+document.getElementById('LUX').style.display = 'none';
+document.getElementById('MH').style.display = 'none';
+document.getElementById('BME').style.display = 'none';
+document.getElementById('table').style.display = 'none';
+document.getElementById('par').style.display = 'none';
+document.getElementById('dsb20').style.display = 'none';
+switch (z)
+{
+case 1:
+document.getElementById('CSS').style.display = 'block';
+break;
+case 2:
+document.getElementById('MQ7').style.display = 'block';
+break;
+case 3:
+document.getElementById('NDIR').style.display = 'block';
+break;
+case 4:
+document.getElementById('PH').style.display = 'block';
+break;
+case 5:
+document.getElementById('SHT').style.display = 'block';
+break;
+case 6:
+document.getElementById('LUX').style.display = 'block';
+break;
+case 7:
+document.getElementById('MH').style.display = 'block';
+break;
+case 8:
+document.getElementById('BME').style.display = 'block';
+break;
+case 9:
+document.getElementById('MQ7').style.display = 'block';
+document.getElementById('NDIR').style.display = 'block';
+document.getElementById('PH').style.display = 'block';
+document.getElementById('SHT').style.display = 'block';
+document.getElementById('LUX').style.display = 'block';
+document.getElementById('MH').style.display = 'block';
+document.getElementById('BME').style.display = 'block';
+document.getElementById('dsb20').style.display = 'block';
+document.getElementById('par').style.display = 'block';
+document.getElementById('table').style.display = 'block';
+break;
+case 10:
+document.getElementById('table').style.display = 'block';
+break;
+case 11:
+document.getElementById('dsb20').style.display = 'block';
+break;
+case 12:
+document.getElementById('par').style.display = 'block';
+break;
+}
+}
+</script>
+</html>

@@ -1,0 +1,243 @@
+<html>
+<head>
+<title>Mydata</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+
+
+<style type="text/css">
+
+	/*  Define the background color for all the EVEN table columns  */
+
+  #table tr th{
+		background: lightgrey;
+	}
+
+table,tr,td,th{
+  width: auto;
+  border-collapse:collapse;
+  border:2px solid black;
+}
+tr,th,td{
+  padding: 5px;
+  text-align: center;
+}
+#table tr:nth-child(odd){
+  background: lightgrey;
+}
+#multiple,#table,#MQ7,#NDIR,#PH,#SHT,#LUX,#MH,#BME,#dsb20,#par{
+  display:None;
+}
+fieldset{
+width: auto;
+align:right;
+}
+legend{
+text-align: center;
+font-size: 20px;
+}
+fieldset div{
+float: left;
+margin-right: 60px;
+width: 650px;
+}
+#header{
+  background-color: lightyellow;
+  width: 100%;
+  min-height: 100px;
+}
+body div #single input{
+  margin:10px;
+  height: 30px;
+  min-width:120px;
+}
+</style>
+</head>
+<body>
+  <div id="Header"><form>
+    <input type='radio' checked="checked" value="single" name="ch" onclick="show_many_single(this)"/>Display Single Data
+    <input type='radio' value="multiple" name="ch" onclick="show_many_single(this)"/>Display Multiple Data<br/></form>
+<script>
+function show_many_single(c)
+{
+document.getElementById('single').style.display = 'none';
+document.getElementById('multiple').style.display = 'none';
+document.getElementById(c.value).style.display = 'block';
+}
+</script>
+    <div id="single">
+    <input type='submit' name='1' value='CSS811 Sensor'  onclick="show_data(this);"/>
+    <input type='submit' name ='2' value='MQ7 Sensor'  onclick="show_data(this);"/>
+    <input type='submit' name='3' value='NDIR Sensor'  onclick="show_data(this);"/>
+    <input type='submit' name="4" value="EZO pH Sensor"  onclick="show_data(this);"/>
+    <input type='submit' name="5" value="SHT1x Sensor"  onclick="show_data(this);"/>
+    <input type='submit' name="6" value="Light Sensor"  onclick="show_data(this);"/>
+    <input type='submit' name="7" value="Soil MH Sensor"  onclick="show_data(this);"/>
+    <input type='submit' name="8" value="BME Sensor"  onclick="show_data(this);"/>
+    <input type='submit' name="11" value="DS18B20 Sensor"  onclick="show_data(this);"/>
+    <input type='submit' name="12" value="PAR Sensor"  onclick="show_data(this);"/>
+    <input type='submit' name="9" value="All Sensors Visualization"  onclick="show_data(this);"/>
+    <input type='submit' name="10" value="Show Table"  onclick="show_data(this);"/>
+  </div>
+  <div id='multiple'><br/>
+    <input type='checkbox' name='CSS'  onclick="multi_data(this);"/>CSS811 Sensor &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type='checkbox' name ='MQ7' onclick="multi_data(this);"/>MQ7 Sensor &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type='checkbox' name='NDIR' onclick="multi_data(this);"/> NDIR Sensor &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type='checkbox' name="PH" onclick="multi_data(this);"/>EZO pH Sensor &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type='checkbox' name="SHT" onclick="multi_data(this);"/>SHT1x Sensor &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type='checkbox' name="LUX" onclick="multi_data(this);"/> Light Sensor &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type='checkbox' name="MH" onclick="multi_data(this);"/> Soil MH Sensor &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type='checkbox' name="dsb20" onclick="multi_data(this);"/>DS18B20 Sensor &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type='checkbox' name="par" onclick="multi_data(this);"/> Par Sensor &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type='checkbox' name="BME"  onclick="multi_data(this);"/> BME Sensor &nbsp;&nbsp;&nbsp;&nbsp;<br/></br/>
+  </div>
+  <!--<input id='btnSun' type='submit' style="border-radius:50%; padding:10px 12px;" value="Refresh"/>-->
+  <div id="a1">
+  </div>
+  <div id="a2">
+  </div>
+</div>
+<div id="Data">
+  <fieldset id="CSS"><legend>CSS811 Sensor</legend>
+  <div id="Container1"></div>
+  <div id="Container2"></div>
+  </fieldset><fieldset id="MQ7"><legend> MQ7 Gas Sensor</legend>
+  <div id="Container3"></div>
+  </fieldset><fieldset id="NDIR"><legend>NDIR CO2 Sensor</legend>
+  <div id="Container4"></div>
+  </fieldset><fieldset id="SHT"><legend>SHT1x Sensor</legend>
+  <div id="Container5"></div>
+  <div id="Container6"></div>#dsb20,#par
+</fieldset><fieldset id="PH"><legend>EZO-pH Sensor</legend>
+<div id="Container7"></div>
+</fieldset><fieldset id="LUX"><legend>Light(LUX) Sensor</legend>
+<div id="Container8"></div>
+      </fieldset><fieldset id="dsb20"><legend>DS18B20 Sensor</legend>
+      <div id="Container17"></div>
+      </fieldset><fieldset id="par"><legend>PAR Sensor</legend>
+      <div id="Container18"></div>
+  </fieldset><fieldset id="MH"><legend>MH Sensor</legend>
+  <div id="Container9"></div>
+  <div id="Container10"></div>
+  <div id="Container11"></div>
+  </fieldset><fieldset id="BME"><legend>BME680 Sensor</legend>
+  <div id="Container12"></div>
+  <div id="Container13"></div>
+  <div id="Container14"></div>
+  <div id="Container15"></div>
+  </fieldset>
+<table id="table">
+  <tr><th>DATE</th>
+  <th>TimeStamp</th>
+  <th>CSS811 Co2</th>
+  <th>CSS811 TVOC</th>
+  <th>MQ7</th>
+  <th>NDIR</th>
+  <th>SHT Temp</th>
+  <th>SHT Humd</th>
+  <th>EZO pH</th>
+  <th>Light(LUX)</th>
+  <th>MH1</th>
+  <th>MH2</th>
+  <th>MH3</th>
+  <th>BME Temp</th>
+  <th>BME Press</th>
+  <th>BME Humd</th>
+  <th>BME Gas</th>
+<th>DS18B20</th>
+<th>PAR</th></tr>
+{% for row in data %}
+<tr>
+{%  for x in row%}
+<td>{{x}}</td>
+{%  endfor %}
+</tr>
+{% endfor %}
+</table>
+</div>
+</body>
+<script type="text/javascript" src="{{ url_for('static',filename='js/jquery-3.2.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/highcharts.src.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/highcharts.export.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/moment.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/main.js') }}"></script>
+<script>
+function multi_data(data)
+{
+  var c = data.name;
+  if(data.checked)
+  {
+    document.getElementById(c).style.display = 'block';
+  }
+  else
+  {
+    document.getElementById(c).style.display = 'none';
+  }
+}
+function show_data(data)
+{
+var z = parseInt(data.name);
+document.getElementById('CSS').style.display = 'none';
+document.getElementById('MQ7').style.display = 'none';
+document.getElementById('NDIR').style.display = 'none';
+document.getElementById('PH').style.display = 'none';
+document.getElementById('SHT').style.display = 'none';
+document.getElementById('LUX').style.display = 'none';
+document.getElementById('MH').style.display = 'none';
+document.getElementById('BME').style.display = 'none';
+document.getElementById('table').style.display = 'none';
+document.getElementById('par').style.display = 'none';
+document.getElementById('dsb20').style.display = 'none';
+switch (z)
+{
+  case 1:
+  document.getElementById('CSS').style.display = 'block';
+    break;
+  case 2:
+  document.getElementById('MQ7').style.display = 'block';
+    break;
+  case 3:
+  document.getElementById('NDIR').style.display = 'block';
+    break;
+  case 4:
+  document.getElementById('PH').style.display = 'block';
+    break;
+  case 5:
+  document.getElementById('SHT').style.display = 'block';
+    break;
+  case 6:
+  document.getElementById('LUX').style.display = 'block';
+    break;
+  case 7:
+  document.getElementById('MH').style.display = 'block';
+    break;
+  case 8:
+  document.getElementById('BME').style.display = 'block';
+    break;
+  case 9:
+    document.getElementById('CSS').style.display = 'block';
+    document.getElementById('MQ7').style.display = 'block';
+    document.getElementById('NDIR').style.display = 'block';
+    document.getElementById('PH').style.display = 'block';
+    document.getElementById('SHT').style.display = 'block';
+    document.getElementById('LUX').style.display = 'block';
+    document.getElementById('MH').style.display = 'block';
+    document.getElementById('BME').style.display = 'block';
+    document.getElementById('dsb20').style.display = 'block';
+    document.getElementById('par').style.display = 'block';
+    break;
+  case 10:
+  document.getElementById('table').style.display = 'block';
+    break;
+  case 11:
+  document.getElementById('dsb20').style.display = 'block';
+  break;
+  case 12:
+  document.getElementById('par').style.display = 'block';
+  break;
+  }
+}
+</script>
+</html>
