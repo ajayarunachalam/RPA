@@ -1,2 +1,1 @@
-*.js linguist-vendored=false
-Framework/static/* linguist-vendored
+static/* linguist-vendored
