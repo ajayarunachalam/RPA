@@ -1,2 +1,3 @@
 static/* linguist-vendored
  *.* linguist-language=Python
+ *.* linguist-language=C/C++
