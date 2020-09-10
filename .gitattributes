@@ -1,3 +1,4 @@
 static/* linguist-vendored
  *.* linguist-language=Python
  *.cpp linguist-detectable=true
+ linguist-vendored
